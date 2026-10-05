@@ -1,0 +1,6 @@
+modules:
+  - example
+  - plugins/ktfmt
+
+plugins:
+  - //plugins/ktfmt
