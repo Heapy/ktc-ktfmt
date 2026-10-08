@@ -5,7 +5,7 @@ Pinned engine: ktfmt 0.64.
 
 - `./kotlin build`: plugin and example main/test sources compile.
 - `./kotlin check`: 9 plugin tests and 1 example test pass; example `ktfmtCheck` passes.
-- `python3 scripts/smoke.py`: isolated copied-plugin consumer builds and tests;
+- `kotlinr scripts/smoke.main.kts`: isolated copied-plugin consumer builds and tests;
   failed formatting checks preserve source bytes; explicit format fixes main,
   test, and script files; generated exclusion stays untouched; a second format
   changes no bytes; a new violation fails the next check.

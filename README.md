@@ -16,7 +16,7 @@ An explicit `javaExecutable` overrides both.
 ./kotlin build
 ./kotlin check
 ./kotlin do ktfmtFormat -m example
-python3 scripts/smoke.py
+kotlinr scripts/smoke.main.kts
 ```
 
 On Windows use `kotlin.bat`. `check` runs unit tests plus `ktfmtCheck` for enabled
@@ -137,3 +137,11 @@ Dependabot tracks action updates. Local verification is recorded in
 - [Toolchain 0.13.0](https://github.com/JetBrains/kotlin-toolchain/tree/v0.13.0)
 
 Apache-2.0; see [LICENSE](LICENSE). Upstream dependencies retain their own licenses.
+
+## Running verification scripts
+
+The `.main.kts` scripts require JDK 25 and Kotlin 2.4.21+ (`kotlinr` on `PATH`).
+Run them with `kotlinr scripts/<name>.main.kts` from the repository root.
+The Kotlin Toolchain `./kotlin` command is a separate executable. CI installs the script runner
+through `.github/actions/setup-kotlin-script`; the first script run compiles the script and
+resolves any pinned Maven dependencies. Later runs use the local script cache.

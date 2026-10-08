@@ -10,6 +10,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: ./.github/actions/setup-kotlin-script
       - uses: Heapy/setup-ktc@cc63216665ce07ce0709fe52ef4a4b0b63aeaddc # v1.1.0
         with:
           version: auto
@@ -21,4 +22,4 @@ jobs:
           ./kotlin check
       - name: Consumer smoke test
         shell: bash
-        run: python3 scripts/smoke.py
+        run: kotlinr scripts/smoke.main.kts
