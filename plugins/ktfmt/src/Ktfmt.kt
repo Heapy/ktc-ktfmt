@@ -1,4 +1,4 @@
-package dev.ktc.plugins.ktfmt
+package io.heapy.ktc.plugins.ktfmt
 
 import com.facebook.ktfmt.format.Formatter
 import java.nio.file.Path

@@ -1,10 +1,10 @@
 tasks:
   ktfmtCheck:
-    action: !dev.ktc.plugins.ktfmt.checkFormatting
+    action: !io.heapy.ktc.plugins.ktfmt.checkFormatting
       moduleRoot: ${module.rootDir}
       settings: ${pluginSettings}
   ktfmtFormat:
-    action: !dev.ktc.plugins.ktfmt.formatSources
+    action: !io.heapy.ktc.plugins.ktfmt.formatSources
       moduleRoot: ${module.rootDir}
       settings: ${pluginSettings}
 

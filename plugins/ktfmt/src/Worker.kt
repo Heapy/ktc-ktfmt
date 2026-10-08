@@ -1,4 +1,4 @@
-package dev.ktc.plugins.ktfmt
+package io.heapy.ktc.plugins.ktfmt
 
 import java.io.File
 import java.io.IOException
@@ -19,7 +19,7 @@ internal fun runInWorker(root: Path, settings: KtfmtSettings, format: Boolean) {
             ?.let { Path.of(it, "bin", executableName).toString() } ?: executableName
     }
     val arguments = listOf(
-        java, "--add-modules=jdk.compiler", "-cp", classpath, "dev.ktc.plugins.ktfmt.WorkerKt",
+        java, "--add-modules=jdk.compiler", "-cp", classpath, "io.heapy.ktc.plugins.ktfmt.WorkerKt",
         root.toString(), format.toString(), settings.style, settings.maxWidth.toString(),
         settings.removeUnusedImports.toString(), settings.includes.size.toString(),
     ) + settings.includes + settings.excludes

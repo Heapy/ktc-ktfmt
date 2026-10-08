@@ -2,7 +2,7 @@ product: jvm/amper-plugin
 
 pluginInfo:
   id: ktfmt
-  settingsClass: dev.ktc.plugins.ktfmt.KtfmtSettings
+  settingsClass: io.heapy.ktc.plugins.ktfmt.KtfmtSettings
 
 dependencies:
   - com.facebook:ktfmt:0.64

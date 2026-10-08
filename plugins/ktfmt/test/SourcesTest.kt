@@ -1,4 +1,4 @@
-package dev.ktc.plugins.ktfmt
+package io.heapy.ktc.plugins.ktfmt
 
 import java.nio.file.Files
 import java.nio.file.Path
