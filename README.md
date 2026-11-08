@@ -1,7 +1,7 @@
 # ktc-ktfmt
 
 A standalone local [Kotlin Toolchain](https://github.com/JetBrains/kotlin-toolchain)
-plugin for ktfmt 0.64. Pinned and tested with Kotlin Toolchain **0.13.0**.
+plugin for ktfmt 0.65. Pinned and tested with Kotlin Toolchain **0.13.0**.
 Includes a real consumer example, a reusable module template, and producer metadata
 for source-based plugin installers. This is an independent repository.
 
@@ -105,15 +105,12 @@ file requiring formatting. ktfmt is a formatter, not a semantic lint engine.
 The embedded upstream Kotlin parser determines supported source syntax; newer
 language constructs may need a dependency upgrade even when Toolchain compiles
 them. Upgrade the literal versions in `plugins/ktfmt/module.yaml` together with
-these checks. Current dependencies: `com.facebook:ktfmt:0.64`.
+these checks. Current dependencies: `org.jetbrains.kotlinx:ktfmt:0.65`.
 
-**Known compatibility gap:** ktfmt 0.64 embeds the Kotlin 2.3.20 parser and rejects
-the bracket destructuring used by Kotlin 2.4.20 with
-`-Xname-based-destructuring=complete`, such as `for ([name, value] in headers)`.
-This prevents checking or formatting the current Kotgent application root. Both
-operations fail without source writes; installing this plugin does not imply
-support for every language feature in Toolchain 0.13.0. The real-project trial
-and successful checks on Kotgent's other modules are recorded below.
+ktfmt 0.65 embeds the Kotlin 2.4.10 parser. The regression suite covers Kotlin 2.4
+bracket destructuring, such as `for ([name, value] in headers)`, which the previous
+0.64 engine rejected. `.kt` and `.kts` files use the corresponding upstream parser
+mode. Formatting output can change with the engine upgrade; review formatter diffs.
 
 ## Verification and maintenance
 
@@ -131,9 +128,9 @@ Dependabot tracks action updates. Local verification is recorded in
 
 ## Upstream and license
 
-- [ktfmt 0.64 release](https://github.com/Kotlin/ktfmt/releases/tag/v0.64)
-- [ktfmt formatter API at the pinned tag](https://github.com/Kotlin/ktfmt/blob/v0.64/core/src/main/java/com/facebook/ktfmt/format/Formatter.kt)
-- [ktfmt formatting options](https://github.com/Kotlin/ktfmt/blob/v0.64/core/src/main/java/com/facebook/ktfmt/format/FormattingOptions.kt)
+- [ktfmt 0.65 release](https://github.com/Kotlin/ktfmt/releases/tag/v0.65)
+- [ktfmt formatter API at the pinned tag](https://github.com/Kotlin/ktfmt/blob/v0.65/core/src/main/kotlin/org/jetbrains/kotlinx/ktfmt/format/Formatter.kt)
+- [ktfmt formatting options](https://github.com/Kotlin/ktfmt/blob/v0.65/core/src/main/kotlin/org/jetbrains/kotlinx/ktfmt/format/FormattingOptions.kt)
 - [Toolchain 0.13.0](https://github.com/JetBrains/kotlin-toolchain/tree/v0.13.0)
 
 Apache-2.0; see [LICENSE](LICENSE). Upstream dependencies retain their own licenses.

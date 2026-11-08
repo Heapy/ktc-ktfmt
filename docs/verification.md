@@ -67,3 +67,14 @@ The Native application was not built or reformatted successfully: an upstream
 formatter/parser upgrade is needed before adopting this plugin for its current
 language features. Neither the language configuration nor upstream parser
 dependencies were overridden during the trial.
+
+## 2026-11-08: ktfmt 0.65
+
+Verified on macOS arm64 with Kotlin Toolchain 0.13.0 and a full JDK 25.
+
+- `./kotlin check`: all 10 plugin tests and the example test pass.
+- The regression suite now verifies successful, idempotent Kotlin 2.4 bracket destructuring formatting.
+- Regular Kotlin sources and scripts use the engine's explicit file-type API.
+- `kotlinr scripts/smoke.main.kts`: isolated consumer build, failed read-only checks, formatting and subsequent checks pass.
+
+The historical parser limitation recorded above applies to 0.64, not this release.

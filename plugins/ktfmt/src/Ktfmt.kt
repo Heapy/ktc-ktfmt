@@ -1,6 +1,8 @@
 package io.heapy.ktc.plugins.ktfmt
 
-import com.facebook.ktfmt.format.Formatter
+import org.jetbrains.kotlinx.ktfmt.format.Formatter
+import org.jetbrains.kotlinx.ktfmt.format.FileType
+import org.jetbrains.kotlinx.ktfmt.format.KotlinCode
 import java.nio.file.Path
 import kotlin.io.path.readText
 import kotlin.io.path.writeText
@@ -53,8 +55,8 @@ internal fun runKtfmt(moduleRoot: Path, settings: KtfmtSettings, format: Boolean
     val updates = files.mapNotNull { file ->
         val original = file.readText()
         val formatted = try {
-            Formatter.format(options, original)
-        } catch (e: com.facebook.ktfmt.format.ParseError) {
+            Formatter.format(options, KotlinCode(original, if (file.toString().endsWith(".kts")) FileType.SCRIPT else FileType.REGULAR))
+        } catch (e: org.jetbrains.kotlinx.ktfmt.format.ParseError) {
             throw IllegalStateException("Cannot format $file: ${e.message}", e)
         }
         if (original == formatted) null else file to formatted

@@ -44,25 +44,16 @@ class FormattingTest {
     }
 
     @Test
-    fun unsupportedKotlin24DestructuringFailsBeforeAnyWrites() = inModule { root ->
-        // Reduced from Kotgent's HttpPushTransport.kt. Revisit this expected failure when
-        // upgrading ktfmt: the pinned 0.64 engine uses the Kotlin 2.3.20 parser.
-        val earlier = root.resolve("A.kt")
-        val modern = root.resolve("Z.kt")
-        val originalEarlier = "fun answer( )=42\n"
-        val originalModern = "fun headers(values: Map<String, String>) {\n" +
-            "    for ([name, value] in values) println(name + value)\n}\n"
-        earlier.writeText(originalEarlier)
-        modern.writeText(originalModern)
-        for (format in listOf(false, true)) {
-            val failure = assertFailsWith<IllegalStateException> {
-                runKtfmt(root, settings, format)
-            }
-            assertTrue(failure.message.orEmpty().contains("Cannot format $modern:"))
-            assertTrue(failure.cause is com.facebook.ktfmt.format.ParseError)
-            assertEquals(originalEarlier, earlier.readText())
-            assertEquals(originalModern, modern.readText())
-        }
+    fun formatsKotlin24DestructuringIdempotently() = inModule { root ->
+        val file = root.resolve("Headers.kt")
+        file.writeText("fun headers(values: Map<String, String>) {\n" +
+            "    for ([name, value] in values) println(name + value)\n}\n")
+        runKtfmt(root, settings, format = true)
+        val formatted = file.readText()
+        assertTrue(formatted.contains("[name, value]"))
+        runKtfmt(root, settings, format = false)
+        runKtfmt(root, settings, format = true)
+        assertEquals(formatted, file.readText())
     }
 
     @Test
